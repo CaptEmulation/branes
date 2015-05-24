@@ -2,9 +2,6 @@ describe('DataStore test suite', function () {
 	var expect = require('chai').expect;
 	var sinon = require('sinon');
 	
-	var _ = require('lodash');
-	var Promise = require('bluebird');
-	
 	var DataStore = require('../../store/dataStore');
 	
 	describe('sanity', function() {
@@ -36,33 +33,6 @@ describe('DataStore test suite', function () {
 			expect(stubProvider.decorateData.calledOnce).to.equal(false);
 		});
 		
-		describe('Simplest Provider', function () {
-			
-			var TestProvider = function (backingData) {
-				this._backingData = backingData;
-			};
-			
-			TestProvider.prototype = Object.create(Object.prototype);
-			_(TestProvider.prototype).extend({
-				handleQuery: function (/*query*/) {
-					var selfie = this;
-					return new Promise(function (resolve /*, reject*/) {
-						resolve(selfie._backingData);
-					});
-				},
-				decorateData: function (data/*, query*/, request) {
-					_(data).extend(request);
-				}
-			});
-				
-			it('install', function () {
-				var ds = new DataStore;
-				var testProvider = new TestProvider({});
-				ds.installer().installProvider(testProvider);
-				expect(ds._providers).to.have.length(1);
-			});
-			
-		});
 	});
 	
 });

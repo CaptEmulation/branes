@@ -106,9 +106,9 @@ describe('Provider test suite', function () {
 		});
 		
 		it('has an export', function () {
-			expect(Provider.delegate()).to.be.ok;
-		})
-	})
+			expect(Provider.delegate()).to.be.not.equal(undefined);
+		});
+	});
 
 	
 });

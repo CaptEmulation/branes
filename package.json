@@ -1,0 +1,31 @@
+{
+  "name": "branes",
+  "version": "0.0.1",
+  "description": "IoT coordinator",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Dean <john.holmes.dean@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.9.25",
+    "es5class": "^2.3.1",
+    "eventemitter3": "^1.1.0",
+    "lodash": "^3.9.1",
+    "mongoose": "^4.0.3",
+    "sprintf": "^0.1.5",
+    "winston": "^1.0.0"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.8",
+    "chai": "^2.3.0",
+    "glob": "^5.0.9",
+    "gulp": "^3.8.11",
+    "gulp-eslint": "^0.12.0",
+    "gulp-mocha": "^2.1.0",
+    "mocha": "^2.2.5",
+    "sinon": "^1.14.1",
+    "watchify": "^3.2.1"
+  }
+}

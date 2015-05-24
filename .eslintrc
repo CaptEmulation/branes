@@ -1,0 +1,13 @@
+{
+	"rules": {
+		"quotes": false,
+		"strict": false,
+		"new-parens": false,
+		"no-trailing-spaces": false,
+		"no-underscore-dangle": false,
+		"eol-last": false
+	},
+	"env": {
+		"node": true
+	}	
+}

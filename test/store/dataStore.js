@@ -16,7 +16,7 @@ describe('DataStore test suite', function () {
 		it('providers can be installed', function () {
 			var ds = new DataStore;
 			var installer = ds.installer();
-			installer.installProvider({});
+			installer.addProvider({});
 			expect(ds._providers).to.have.length(1);
 		});
 		
@@ -27,12 +27,35 @@ describe('DataStore test suite', function () {
 				handleQuery: sinon.stub(),
 				decorateData: sinon.stub()
 			};
-			installer.installProvider(stubProvider);
+			installer.addProvider(stubProvider);
 			ds.query({});
 			expect(stubProvider.handleQuery.calledOnce).to.equal(true);
 			expect(stubProvider.decorateData.calledOnce).to.equal(false);
 		});
 		
+	});
+	
+	describe('install and get data', function () {
+		
+		
+		var ds;
+		var Provider = require('../../store/delegateProvider');
+		
+		beforeEach(function () {
+			ds = new DataStore;
+			var installer = ds.installer();
+			installer.addProvider(Provider.delegate({
+//				willDecorate: function (context) {
+//					
+//				},
+//				handlePromise: function (context) {
+//					
+//				},
+//				decorate: function (context) {
+//					
+//				}
+			}));
+		});
 	});
 	
 });

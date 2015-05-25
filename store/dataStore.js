@@ -1,6 +1,5 @@
-//var _ = require('lodash');
-//var bluebird = require('bluebird');
-
+var _ = require('lodash');
+var Q = require('q');
 
 var DataStore = module.exports = function () {
 	this._providers = [];	
@@ -15,7 +14,7 @@ DataStore.prototype = {
 	installer: function () {
 		var selfie = this;
 		var installer = {
-			installProvider: function (provider) {
+			addProvider: function (provider) {
 				selfie._providers.push(provider);
 			}
 		};
@@ -23,19 +22,27 @@ DataStore.prototype = {
 	},
 	
 	query: function (query) {
+		var context = {
+			query: query,
+			data: {}
+		};
 		var providers = this._providers;
 		var queries = providers.map(function (provider) {
-			return provider.handleQuery(query);
+			return provider.handleQuery(context);
 		});
 		
-		var data;
-		console.log(queries);
 		queries.forEach(function (queryPromise, index) {
 			if (queryPromise) {
 				queryPromise.then(function (response) {
-					providers[index].decorateData(data, query, response);
+					providers[index].decorate(_.extend(context, {
+						response: response
+					}));
 				});
 			}
+		});
+		
+		return Q.all(queries).then(function () {
+			return context.data;
 		});
 	}
 };

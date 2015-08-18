@@ -3,7 +3,7 @@ describe('MultiProvider test stuite', function () {
 	var expect = require('chai').expect;
 	//var sinon = require('sinon');
 	
-	var MultiProvider = require('../../store/multiProvider');
+	var MultiProvider = require('../../../server/store/multiProvider');
 	
 	describe('sanity', function () {
 	

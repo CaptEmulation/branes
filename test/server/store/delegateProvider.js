@@ -6,8 +6,8 @@ describe('Provider test suite', function () {
 	var _ = require('lodash');
 	var Promise = require('bluebird');
 	
-	var Provider = require('../../store/delegateProvider');
-	var DataStore = require('../../store/dataStore');
+	var Provider = require('../../../server/store/delegateProvider');
+	var DataStore = require('../../../server/store/dataStore');
 	
 	describe('sanity test', function () {
 		

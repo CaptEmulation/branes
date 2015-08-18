@@ -5,7 +5,7 @@ var ES5Class = require('es5class');
 var _ = require('lodash');
 var EventEmitter = require('events').EventEmitter;
 var sprintf = require('sprintf').sprintf;
-var apiResponse = require('express-api-response');
+var mongoose = require('mongoose');
 
 var WithSearchFields = ES5Class.$define('WithSearchField', {
   withSearchString: function (field, term) {
@@ -30,10 +30,11 @@ var WithSearchFields = ES5Class.$define('WithSearchField', {
 var ServiceDsl = ES5Class.$define('ServiceDsl', {
   construct: function (options) {
     options = Options.for(options);
-    this._provider = options.expect('provider')
     this._route = options.expect('route');
     this._name = options.expect('name');
-    this._find = options.default('find', 'find');
+    this.setProvider(options.default('name') || options.expect('provider'));
+    this.setFind(options.default('find', 'find'));
+
   },
   model: function () {
     return this._provider(this._name);
@@ -42,16 +43,34 @@ var ServiceDsl = ES5Class.$define('ServiceDsl', {
     return this._route;
   },
   justOne: function () {
-    this._find = 'findOne';
+    this.setFind('findOne');
     return this;
   },
-  middleware: function () {
-    var middleware = {
+  setProvider: function (provider) {
+    if (_.isString(provider)) {
+      this._provider = function () {
+        return mongoose.model(provider);
+      };
+    } else if (_.isFunction(provider)) {
+      this._provider = provider;
+    }
+  },
+  setFind: function (find) {
+    if (_.isString(find)) {
+      this._find = function (model, query) {
+        return model[find].call(model, query).exec();
+      };
+    } else if (_.isFunction(find)) {
+      this._find = find;
+    }
+  },
+  installTo: function (app) {
+    var operations = {
       find: function(req, res) {
         var query = {};
         this.emit('req', req, query);
         var model = this.model();
-        return Q(model[this._find].call(model, query).exec())
+        return Q(this._find(model, query))
           .then(function (all) {
             res.json(all);
           })
@@ -82,7 +101,7 @@ var ServiceDsl = ES5Class.$define('ServiceDsl', {
           });
       }.bind(this),
       update: function (req, res) {
-        middleware.find(req, res)
+        operations.find(req, res)
           .then(function () {
             var model = this.model();
             _(model).extend(req.body);
@@ -98,17 +117,15 @@ var ServiceDsl = ES5Class.$define('ServiceDsl', {
           }.bind(this));
       }.bind(this)
     };
-    var route = function (method, endpoint) {
-      return function (router) {
-        router.route(this.route())[method](endpoint);
-      }.bind(this);
+    var route = function (app, method, endpoint) {
+      app.route(this.route())[method](endpoint);
     }.bind(this);
     
-    return {
-      GET: route('get', middleware.find),
-      POST: route('post', middleware.create),
-      PUT: route('put', middleware.update)
-    }
+    route(app, 'get', operations.find);
+    route(app, 'post', operations.create)
+    route(app, 'put', operations.update);
+    
+    return this;
   }
 })
   .$implement(EventEmitter)

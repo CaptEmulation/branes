@@ -2,7 +2,7 @@ describe('DataStore test suite', function () {
 	var expect = require('chai').expect;
 	var sinon = require('sinon');
 	
-	var DataStore = require('../../store/dataStore');
+	var DataStore = require('../../../server/store/dataStore');
 	
 	describe('sanity', function() {
 		
@@ -39,7 +39,7 @@ describe('DataStore test suite', function () {
 		
 		
 		var ds;
-		var Provider = require('../../store/delegateProvider');
+		var Provider = require('../../../server/store/delegateProvider');
 		
 		beforeEach(function () {
 			ds = new DataStore;

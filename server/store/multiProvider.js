@@ -9,20 +9,15 @@ var MultiProvider = module.exports = function () {
 MultiProvider.prototype = Object.create(null);
 _(MultiProvider.prototype).extend({
 	handleQuery: function (context) {
-		var activeDelegates = [];
+		context._activeDelegates = [];
+
 		this._delegates.forEach(function (delegate) {
 			if (delegate.willDecorate(context)) {
-				activeDelegates.push(delegate);
+				context._activeDelegates.push(delegate.promiseData(context));
 			}
 		});
 		
-		var dataPromises = [];
-		activeDelegates.forEach(function (delegate) {
-			dataPromises.push(delegate.promiseData(context));
-		});
-		context._activeDelegates = activeDelegates;
-		
-		return Q.all(dataPromises);
+		return Q.all(context._activeDelegates);
 	},
 	decorate: function (context) {
 		context._activeDelegates.forEach(function (delegate) {

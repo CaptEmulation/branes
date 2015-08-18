@@ -6,14 +6,15 @@ describe('Provider test suite', function () {
 	var _ = require('lodash');
 	var Promise = require('bluebird');
 	
-	var Provider = require('../../store/provider');
-	var DataStore = require('../../store/dataStore');
+	var Provider = require('../../../server/store/provider');
+	var DataStore = require('../../../server/store/dataStore');
 	
 	describe('sanity test', function () {
 		
 		it('can be instantiated', function () {
 			expect(new Provider).to.be.an.instanceof(Provider);
 		});
+		
 	});
 	
 	describe('Simplest Provider', function () {
@@ -34,11 +35,11 @@ describe('Provider test suite', function () {
 				_(data).extend(request);
 			}
 		});
-			
+		
 		it('install', function () {
 			var ds = new DataStore;
 			var testProvider = new TestProvider({});
-			ds.installer().installProvider(testProvider);
+			ds.installer().addProvider(testProvider);
 			expect(ds._providers).to.have.length(1);
 		});
 		

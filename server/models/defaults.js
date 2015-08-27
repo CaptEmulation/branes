@@ -100,7 +100,7 @@ module.exports = {
 	}],
 	milestones: [{
 		icon: 'fa-dashboard',
-		total: '100,000+',
+		total: '25,000+',
 		title: 'Automated test cases written'
 	}, {
 		icon: 'fa-code',
@@ -108,7 +108,7 @@ module.exports = {
 		title: 'open source contributions'
 	}, {
 		icon: 'fa-code',
-		total: '1,000,000+',
+		total: '500,000+',
 		title: 'Lines of Code Written'
 	}, {
 		icon: 'fa-code-fork',
@@ -118,10 +118,6 @@ module.exports = {
 		icon: 'fa-pencil',
 		total: '100+',
 		title: 'technical documents authored'
-	}, {
-		icon: 'fa-gears',
-		total: 'λ',
-		title: 'Favorite operator'
 	}],
 	educations: [{
 		diploma: 'B.S. in Computer Engineering',

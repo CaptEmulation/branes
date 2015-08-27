@@ -37,6 +37,14 @@
 		    "args": ["test/**/*.js"],
 		    "runtimeExecutable": null,
 		    "env": { }
+		},
+		{
+		    "name": "Gulp",
+		    "type": "node",
+		    "program": "./node_modules/gulp/bin/gulp.js",
+			"stopOnEntry": false,
+		    "runtimeExecutable": null,
+		    "env": { }
 		}
 	]
 }

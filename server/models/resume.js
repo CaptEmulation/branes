@@ -18,11 +18,11 @@ exports.init = function (app) {
 			name: String,
 			address: String
 		}],
-		companies: [{
+		experiences: [{
 			name: String,
 			summary: String,
-			role: String,
-			responsabilities: [ String ]
+			title: String,
+			timeFrame: String
 		}]
 	});
 	

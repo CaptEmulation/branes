@@ -11,13 +11,16 @@ var logger = app.logger = new (winston.Logger)({
   ]
 });
 
-app.listen(4000, function (err, connection) {
-  if (err) throw err;
-  logger.info('Up and running');
-  require('./server/db').init(app);
-});
+app.use(express.static('public'));
 
 app.use(function (req, res, next) {
   logger.debug(req.path);
   next();
+});
+
+
+app.listen(4000, function (err, connection) {
+  if (err) throw err;
+  logger.info('Up and running');
+  require('./server/db').init(app);
 });

@@ -19,7 +19,7 @@ app.use(function (req, res, next) {
 });
 
 
-app.listen(process.ENV.PORT || 4000, function (err, connection) {
+app.listen(process.env.PORT || 4000, function (err, connection) {
   if (err) throw err;
   logger.info('Up and running');
   require('./server/db').init(app);

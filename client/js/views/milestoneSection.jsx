@@ -40,19 +40,20 @@ var Milestones = React.createClass({
 	  );
 	});
     return (
-      <Parallax bgImage="../img/parallax_code.png" strength={300} fullWidth={true} className="parallax">
-  		<div className="parallax-overlay-2"> 
-  			<div className="container">
-  					<div className="title">
-						<h1>Milestones Achieved</h1>
-  					</div>
-					  
-						<div className="row count">
-							{milestones}
-						</div>
-  			</div>	 
-  		</div>	
- 	  </Parallax>
+	 
+		<Parallax bgImage="../img/parallax_code.png" strength={300} fullWidth={true} className="parallax">
+			<div className="parallax"> 
+			   <div className="container">
+				 <div className="title">
+				    <h1>Milestones Achieved</h1>
+				  </div>
+						
+				  <div className="row count">
+					{milestones}
+				  </div>
+				</div>	 
+     	    </div>	
+		</Parallax>
     );
   }
 

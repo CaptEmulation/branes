@@ -10011,6 +10011,9 @@ a.hire-btn:hover {
 #resume.section {
   background-color: #f0f2f7;
 }
+#resume.section .container {
+  display: inline-table;
+}
 /* 8.1 - Timeline
 ------------------------------------------------------------------------*/
 .timeline {

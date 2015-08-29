@@ -3,12 +3,18 @@ var classnames = require('classnames');
 var CircularGuage = require('./circularGuage.jsx');
 
 var Experience = React.createClass({
-
   getDefaultProps: function () {
     return {
 	  skills: []
 	};
   },
+  
+  getInitialState: function () {
+    return {
+	  visible: false
+	};
+  },
+ 
   
   /**
    * @return {object}
@@ -19,7 +25,7 @@ var Experience = React.createClass({
 	this.props.skills.forEach(function (skill, index) {
 	  skills.push(
 	    <div className="col-xs-12 col-sm-6 col-md-3 chart-padding">
-			<CircularGuage percentage={skill.amount}/>
+			<CircularGuage key={"gauge." + index} percentage={skill.amount} halt={!this.state.visible}/>
 			<div className="skills-content">
 				<h3>{skill.title}</h3>
 				<p>{skill.summary}</p>
@@ -34,7 +40,7 @@ var Experience = React.createClass({
 		  index % 4 === 3 ? "visible-lg-block visible-md-block" : null, 
 		  index % 2 === 1 ? "visible-sm-block" : null)
 	    }></div>);
-	});
+	}, this);
 
 
     return (

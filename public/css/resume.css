@@ -10016,9 +10016,6 @@ a.hire-btn:hover {
 }
 /* 8.1 - Timeline
 ------------------------------------------------------------------------*/
-.timeline {
-  height: 100%;
-}
 .timeline:after,
 .timeline::after {
   content: "";
@@ -11496,7 +11493,7 @@ Responsive
     margin-left: 30px;
   }
 }
-@media (max-width: 980px) {
+@media (max-width: 992px) {
   .about-info {
     margin-top: 50px;
   }
@@ -11517,7 +11514,7 @@ Responsive
     display: block;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   #header {
     left: 90px;
   }
@@ -11565,68 +11562,6 @@ Responsive
     padding-left: 0px;
     padding-right: 0px;
   }
-  .clients_logo li {
-    margin-left: 0px;
-  }
-}
-@media (max-width: 375px) {
-  #header {
-    width: 170px;
-  }
-  #open-nav.nav-full {
-    width: 170px;
-  }
-  .navone li {
-    padding: 12px 0;
-  }
-  .info > h2 {
-    font-size: 50px;
-  }
-  .avatar-section {
-    bottom: -150px;
-  }
-  .avatar-section img {
-    height: 300px;
-    width: 300px;
-  }
-  .masonry-post {
-    width: 300px;
-  }
-  .clients_logo li {
-    margin-left: 0px;
-  }
-}
-@media (max-width: 360px) {
-  #open-nav.nav-full {
-    width: 170px;
-  }
-  .navone li {
-    padding: 12px 0;
-  }
-  .info > h2 {
-    font-size: 50px;
-  }
-  .avatar-section {
-    bottom: -150px;
-  }
-  .avatar-section img {
-    height: 300px;
-    width: 300px;
-  }
-  .about-extra-icon ul li {
-    height: 100px;
-    width: 100px;
-  }
-  .about-extra-icon ul li p {
-    font-size: 14px;
-    padding-top: 20px;
-  }
-  .masonry-post {
-    width: 300px;
-    margin-left: 0px;
-  }
-}
-@media (max-width: 320px) {
   .clients_logo li {
     margin-left: 0px;
   }

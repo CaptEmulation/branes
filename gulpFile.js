@@ -145,18 +145,30 @@ var compile = function (options) {
       require: options.src
    });
 
-   /* We only run the vendor bundler once, as we do not care about changes here,
-   as there are none */
-   var start = new Date();
-   console.log('Building ' + options.name + ' bundle');
-   vendorsBundler.bundle()
-      .on('error', gutil.log)
-      .pipe(source(options.name))
-      .pipe(gulpif(!options.development, streamify(uglify())))
-      .pipe(gulp.dest(options.dest))
-      .pipe(notify(function () {
-         console.log(options.name + ' bundle built in ' + (Date.now() - start) + 'ms');
-      }));
+   var rebundle = function () {
+      
+     /* We only run the vendor bundler once, as we do not care about changes here,
+     as there are none */
+     var start = new Date();
+     console.log('Building ' + options.name + ' bundle');
+     vendorsBundler.bundle()
+        .on('error', gutil.log)
+        .pipe(source(options.name))
+        .pipe(gulpif(!options.development, streamify(uglify())))
+        .pipe(gulp.dest(options.dest))
+        .pipe(notify(function () {
+          console.log(options.name + ' bundle built in ' + (Date.now() - start) + 'ms');
+        }));
+   }
+
+       /* When we are developing we want to watch for changes and
+    trigger a rebundle */
+   if (options.development) {
+      vendorsBundler = watchify(vendorsBundler);
+      vendorsBundler.on('update', rebundle);
+   }
+   
+   rebundle();
 };
 
 var lessTask = function (options) {

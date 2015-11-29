@@ -1,0 +1,25 @@
+
+  - npm -s install
+  - npm test
+
+cache:
+  mount:
+    - node_modules
+    - .git
+
+build:
+  image: node0.10
+  commands:
+    - npm install
+	- npm run test
+
+deploy:
+  git:
+    target: dokku@johndeanresume.com:branes
+    branch: $$BRANCH
+    force: false
+
+
+notify:
+  recipients:
+    - john.holmes.dean@gmail.com

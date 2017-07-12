@@ -4,7 +4,8 @@
   "description": "IoT coordinator",
   "main": "server.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "start": "node server.js"
   },
   "author": "John Dean <john.holmes.dean@gmail.com>",
   "license": "MIT",

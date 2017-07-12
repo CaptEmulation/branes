@@ -1,25 +1,17 @@
+pipeline:
+  build:
+    image: node:boron
+    commands:
+      - npm install
+    when:
+      branch: master
+      event: push
 
-  - npm -s install
-  - npm test
-
-cache:
-  mount:
-    - node_modules
-    - .git
-
-build:
-  image: node0.10
-  commands:
-    - npm install
-	- npm run test
-
-deploy:
-  git:
-    target: dokku@johndeanresume.com:branes
-    branch: $$BRANCH
-    force: false
-
-
-notify:
-  recipients:
-    - john.holmes.dean@gmail.com
+  publish:
+    image: plugins/docker
+    registry: docker.soapbubble.online:5000
+    repo: docker.soapbubble.online:5000/captemulation/branes
+    tag: latest
+    when:
+      branch: master
+      event: push

@@ -23,7 +23,7 @@
     "jquery-browserify": "^1.8.1",
     "lodash": "^3.9.1",
     "lodash-deep": "^1.6.0",
-    "mongoose": "^4.0.3",
+    "mongoose": "^5.7.6",
     "q": "^1.4.1",
     "react": "^0.13.3",
     "react-countdown-clock": "CaptEmulation/react-countdown-clock",
